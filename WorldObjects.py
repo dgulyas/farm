@@ -7,7 +7,8 @@ class Thing:
 		self.deleteMe = False #set to true if an animal dies, food gets depleted. Object will be deleted.
 
 class Animal(Thing):
-	def __init__(hunger = 1, speed = 1, fullness = 30, char = "a"):
+	def __init__(self, map, hunger = 1, speed = 1, fullness = 30, char = "a", x = 0, y = 0):
+		super().__init__(map = map, x=x, y=y)
 		self.hunger = hunger
 		self.speed = speed
 		self.fullness = fullness
