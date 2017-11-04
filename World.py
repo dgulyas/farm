@@ -1,9 +1,10 @@
-import random
 import os
+import sys
 import time
-import WorldObjects as wo
-#import Map as Map
+from Animal import Animal
+from Map import Map
 
+'''
 class World():
 	def __init__(self):
 		# Creates the world map, which is printed to the console
@@ -35,48 +36,26 @@ class World():
 	
 	def getNearestFood():
 		return None
-
-class Map():
-
-	def __init__(self):
-		# Creates the world map, which is printed to the console
-		self.w, self.h = 40, 15; #width, height
-		self.map = [[None for x in range(self.w)] for y in range(self.h)]
-	
-	def __getitem__(self, key):
-		return self.map[key]
 		
-	def __str__(self):
-		str = ""
-		for row in self.map:
-			for cell in row:
-				str += " " if cell is None else cell.char
-			str += "\n"
-		return str
-	
-	def randOpenCellCoords(self):
-	#This doesn't scale well past ~85% full
-		h, w = self.randCellCoords()
-		while self.map[h][w] != None:
-			h, w = self.randCellCoords()
-		return h, w
-	
-	def randCellCoords(self):
-		return random.randint(0,self.h-1), random.randint(0,self.w-1)
-		
+'''
+
 def RunWorld(numAnimals = 10):
 	
+	#print("test")
 	map = Map()
 	#print(map)
 	
 	animals = []
 	for i in range(numAnimals):
-		height, width = map.randOpenCellCoords()
-		animal = wo.Animal(map, x=height, y=width)
+		openPoint = map.randOpenPoint()
+		animal = Animal(map, openPoint)
 		animals.append(animal)
-		map[height][width] = animal #I'm not happy with storing the coords of the animal in two places.
+		map.get(openPoint).value = animal
 	
-	print(map)
+	os.system('clear')
+	sys.stdout.write(map.__str__())
+	sys.stdout.flush()
+	
 	'''
 	world = World()
 	
@@ -88,4 +67,5 @@ def RunWorld(numAnimals = 10):
 		world.tick()
 	'''
 if __name__ == "__main__":
-    RunWorld()
+	
+	RunWorld()
