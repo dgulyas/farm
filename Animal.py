@@ -1,18 +1,19 @@
 from BaseThing import BaseThing
 
 class Animal(BaseThing):
-	def __init__(self, map, point, hunger = 1, speed = 1, fullness = 30, char = "a"):
+	def __init__(self, map, point, hunger = 1, speed = 1, fullness = 3, char = "a"):
 		super().__init__(map = map, point=point)
 		self.hunger = hunger
 		self.speed = speed
 		self.fullness = fullness
 		self.char = char
 	
-	def tick(world):
-		self.fullness -= hunger
-		if fullness < 1:
+	def tick(self):
+		self.fullness -= self.hunger
+		if self.fullness < 1:
 			self.deleteMe = True
 		
+		'''
 		reachableFood = world.getReachableFood(self.coord)
 		if reachableFood is not None:
 			reachableFood.reduce()
@@ -20,6 +21,7 @@ class Animal(BaseThing):
 		else:
 			nearestFood = world.getNearestFood(self.coord)
 			self.moveTowards(nearestFood)
+		
 		
 	def moveTowards(point):
 		xDiff = self.coord.x - point.x
@@ -37,4 +39,4 @@ class Animal(BaseThing):
 		map.cell(self.coord).value = self
 		#how to remove it from the map if it's dead.
 		#if I was fancy there would be collision detection here, or some kind of random path logic
-		
+		'''

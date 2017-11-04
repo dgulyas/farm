@@ -5,7 +5,7 @@ from Point import Point
 class Map():
 
 	def __init__(self):
-		self.width, self.height = 10, 11
+		self.width, self.height = 30, 15
 		self.map = [[MapCell(Point(x,y), None) for x in range(self.width)] for y in range(self.height)]
 	
 	#This doesn't work because you can't pass objects into [] :(
@@ -20,7 +20,7 @@ class Map():
 		for row in self.map:
 			for cell in row:
 				#string += "(" + str(cell.point.x) + "," + str(cell.point.y) + ")"
-				string += " " if cell.value is None else cell.value.char
+				string += " " if cell.value is None else str(cell.value.char)
 			string += "\n"
 		return string
 	

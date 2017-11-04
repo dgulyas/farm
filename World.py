@@ -39,7 +39,7 @@ class World():
 		
 '''
 
-def RunWorld(numAnimals = 10):
+def RunWorld(numAnimals = 80):
 	
 	#print("test")
 	map = Map()
@@ -52,10 +52,29 @@ def RunWorld(numAnimals = 10):
 		animals.append(animal)
 		map.get(openPoint).value = animal
 	
-	os.system('clear')
-	sys.stdout.write(map.__str__())
-	sys.stdout.flush()
+	tickNumber = 0
 	
+	while True:
+		tickNumber += 1
+		os.system('clear')
+		sys.stdout.write(map.__str__())
+		sys.stdout.write(str(tickNumber) + " " + str(len(animals)))
+		sys.stdout.flush()
+		
+		time.sleep(2)
+		
+		deadThings = []
+		for animal in animals:
+			animal.tick()
+			if animal.deleteMe:
+				deadThings.append(animal)
+		
+		for thing in deadThings:
+			map.get(thing.coord).value = None
+			if isinstance(thing, Animal):
+				animals.remove(thing)
+		
+		
 	'''
 	world = World()
 	
