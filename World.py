@@ -39,7 +39,7 @@ class World():
 		
 '''
 
-def RunWorld(numAnimals = 80):
+def RunWorld(numAnimals = 100):
 	
 	#print("test")
 	map = Map()
@@ -58,10 +58,10 @@ def RunWorld(numAnimals = 80):
 		tickNumber += 1
 		os.system('clear')
 		sys.stdout.write(map.__str__())
-		sys.stdout.write(str(tickNumber) + " " + str(len(animals)))
+		sys.stdout.write("time:" + str(tickNumber) + " open space:" + str(map.numOpenCells()))
 		sys.stdout.flush()
 		
-		time.sleep(2)
+		time.sleep(0.2)
 		
 		deadThings = []
 		for animal in animals:

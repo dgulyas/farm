@@ -1,7 +1,8 @@
+import random
 from BaseThing import BaseThing
 
 class Animal(BaseThing):
-	def __init__(self, map, point, hunger = 1, speed = 1, fullness = 3, char = "a"):
+	def __init__(self, map, point, hunger = 1, speed = 1, fullness = 30, char = "a"):
 		super().__init__(map = map, point=point)
 		self.hunger = hunger
 		self.speed = speed
@@ -12,6 +13,19 @@ class Animal(BaseThing):
 		self.fullness -= self.hunger
 		if self.fullness < 1:
 			self.deleteMe = True
+			return
+		
+		self.moveRandom()
+		
+	def moveRandom(self):
+		possibleLocations = self.map.getOpenNeighbourPoints(self.coord)
+		if len(possibleLocations) == 0:
+			return
+		
+		self.map.get(self.coord).value = None
+		self.coord = random.choice(possibleLocations)
+		self.map.get(self.coord).value = self
+		
 		
 		'''
 		reachableFood = world.getReachableFood(self.coord)
