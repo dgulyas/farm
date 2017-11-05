@@ -17,14 +17,17 @@ class Animal(BaseThing):
 		
 		self.moveRandom()
 		
+	def moveTo(self, point):
+		self.map.get(self.coord).value = None
+		self.coord = point
+		self.map.get(self.coord).value = self
+		
 	def moveRandom(self):
 		possibleLocations = self.map.getOpenNeighbourPoints(self.coord)
 		if len(possibleLocations) == 0:
 			return
 		
-		self.map.get(self.coord).value = None
-		self.coord = random.choice(possibleLocations)
-		self.map.get(self.coord).value = self
+		self.moveTo(random.choice(possibleLocations))
 		
 		
 		'''
