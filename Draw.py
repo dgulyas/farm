@@ -7,15 +7,28 @@ from Point import Point
 
 
 def Draw():
-	map = Map()
-
 	animals = []
 	
-	for i in range(10):
-		animal = HomingAnimal(map, Point(1,1), Point(map.width-1,map.height-1), False)
-		map.get(animal.coord).value = animal
-		animals.append(animal)
+	height = 0
+	width = 0
 	
+	with open("C:\\work\\test.txt") as file:
+		for line in file:
+			height += 1
+			if len(line) > width:
+				width = len(line)
+	
+	map = Map(width = width+1, height = height)
+	
+	with open("C:\\work\\test.txt") as file:
+		for lineNum, line in enumerate(file, 1):
+			for charNum, char in enumerate(line.rstrip()):
+				if char != " ":
+					#print(str(charNum) + " " + str(lineNum) + " " + char)
+					animal = HomingAnimal(map, map.randPoint(), Point(charNum, lineNum-1), False, char = char)
+					map.get(animal.coord).value = animal
+					animals.append(animal)
+			
 	tickNumber = 0
 	
 	while True:

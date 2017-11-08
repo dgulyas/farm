@@ -4,8 +4,9 @@ from Point import Point
 
 class Map():
 
-	def __init__(self):
-		self.width, self.height = 60, 30
+	def __init__(self, width = 60, height = 30):
+		self.width = width
+		self.height = height
 		self.map = [[MapCell(Point(x,y), None) for x in range(self.width)] for y in range(self.height)]
 	
 	#This doesn't work because you can't pass objects into [] :(

@@ -13,6 +13,7 @@ class HomingAnimal(BaseAnimal):
 	def tick(self):
 		if self.coord != self.destination:
 			self.moveTowards(self.destination)
+		self.moveTo(self.coord) #This replaces the animal on the map if it's been over written. TODO: Make better
 		
 	def moveTowards(self, point):
 		possibleMoves = []
