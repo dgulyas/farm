@@ -1,9 +1,12 @@
 import random
-from BaseThing import BaseThing
+from BaseAnimal import BaseAnimal
+from Point import Point
 
-class Animal(BaseThing):
-	def __init__(self, map, point, hunger = 1, speed = 1, fullness = 30, char = "a"):
-		super().__init__(map = map, point=point)
+
+class Animal(BaseAnimal):
+	def __init__(self, map, point, destination = None, hunger = 1, speed = 1, fullness = 30, char = "a"):
+		super().__init__(map = map, point=point, speed=speed, char=char)
+		self.destination = destination
 		self.hunger = hunger
 		self.speed = speed
 		self.fullness = fullness
@@ -17,18 +20,10 @@ class Animal(BaseThing):
 		
 		self.moveRandom()
 		
-	def moveTo(self, point):
-		self.map.get(self.coord).value = None
-		self.coord = point
-		self.map.get(self.coord).value = self
-		
 	def moveRandom(self):
-		possibleLocations = self.map.getOpenNeighbourPoints(self.coord)
-		if len(possibleLocations) == 0:
-			return
-		
-		self.moveTo(random.choice(possibleLocations))
-		
+		possibleMoves = self.map.getOpenNeighbourPoints(self.coord)
+		if len(possibleMoves) > 0:
+			self.moveTo(random.choice(possibleMoves))
 		
 		'''
 		reachableFood = world.getReachableFood(self.coord)
@@ -38,22 +33,4 @@ class Animal(BaseThing):
 		else:
 			nearestFood = world.getNearestFood(self.coord)
 			self.moveTowards(nearestFood)
-		
-		
-	def moveTowards(point):
-		xDiff = self.coord.x - point.x
-		yDiff = self.coord.y - point.y
-		if abs(xDiff) > abs(yDiff):
-			if xDiff < 0:
-				self.coord.x += 1
-			else:
-				self.coord.x -= 1
-		else:
-			if yDiff < 0:
-				self.coord.y += 1
-			else:
-				self.coord.y -= 1
-		map.cell(self.coord).value = self
-		#how to remove it from the map if it's dead.
-		#if I was fancy there would be collision detection here, or some kind of random path logic
 		'''

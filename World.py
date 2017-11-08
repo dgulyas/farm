@@ -4,6 +4,7 @@ import time
 from Animal import Animal
 from Food import Food
 from Map import Map
+from Point import Point
 
 def RunWorld(numAnimals = 100, numFood = 15):
 	
@@ -52,7 +53,7 @@ def RunWorld(numAnimals = 100, numFood = 15):
 				animals.remove(thing)
 			if isinstance(thing, Food):
 				foods.remove(thing)
-		
-if __name__ == "__main__":
-	
+
+
+if __name__ == "__main__":	
 	RunWorld()

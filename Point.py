@@ -20,3 +20,19 @@ class Point():
 	def surroundingPoints(self, point):
 		return [self.down(), self.up(), self.right(), self.left()]
 	
+	def combine(self, point):
+		self.x += point.x
+		self.y += point.y
+	
+	def shift(self, xDiff=0, yDiff=0):
+		self.x += xDiff
+		self.y += yDiff
+	
+	def __eq__(self, other):
+		return self.x == other.x and self.y == other.y
+		
+	#static methods below
+	
+	def add(point1, point2):
+		return Point(point1.x + point2.x, point1.y + point2.y)
+	
